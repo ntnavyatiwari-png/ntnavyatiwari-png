@@ -1,6 +1,7 @@
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min-height:600px;}
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;}
 .app{display:flex;min-height:760px;border:1px solid #c8d8c8;border-radius:12px;overflow:hidden;background:#fff;}
 .sidebar{width:224px;flex-shrink:0;background:#1a3d2b;display:flex;flex-direction:column;}
 .sidebar-logo{padding:22px 20px 18px;border-bottom:1px solid #2d5a3d;}
@@ -27,13 +28,13 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
 .content{padding:22px 26px;}
 
 /* HOME */
-.home-hero{background:#1a3d2b;border-radius:10px;overflow:hidden;margin-bottom:18px;display:flex;min-height:160px;}
-.home-hero-text{padding:28px 28px;flex:1;}
+.home-hero{background:#1a3d2b;border-radius:10px;overflow:hidden;margin-bottom:18px;display:flex;min-height:180px;}
+.home-hero-text{padding:28px;flex:1;}
 .home-hero-text h1{font-size:21px;font-weight:700;color:#fff;line-height:1.25;margin-bottom:8px;}
 .home-hero-text p{font-size:12px;color:#b8d4bf;line-height:1.6;margin-bottom:16px;max-width:340px;}
 .btn-white{background:#fff;color:#1a3d2b;border:none;padding:8px 18px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:Arial;transition:background 0.12s;}
 .btn-white:hover{background:#e6f4ec;}
-.home-hero-img{width:220px;flex-shrink:0;object-fit:cover;}
+.home-hero-img{width:260px;flex-shrink:0;object-fit:cover;object-position:center;}
 .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
 .stat-card{background:#fff;border:1px solid #e0eae0;border-radius:9px;padding:14px;border-left:3px solid #2e7d4f;}
 .stat-num{font-size:20px;font-weight:700;color:#1a3d2b;}
@@ -51,8 +52,9 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
 .parts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
 .part-card{background:#fff;border:1px solid #e0eae0;border-radius:10px;overflow:hidden;transition:border-color 0.12s;}
 .part-card:hover{border-color:#2e7d4f;}
-.card-img-wrap{height:120px;overflow:hidden;background:#e6f4ec;}
-.card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+/* No fixed height crop — show image at natural reasonable size */
+.card-img-wrap{background:#e6f4ec;display:flex;align-items:center;justify-content:center;padding:12px;}
+.card-img-wrap img{width:100%;max-height:160px;object-fit:contain;display:block;}
 .card-body{padding:12px 14px;}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
 .card-name{font-size:12px;font-weight:700;color:#1a2e1a;line-height:1.3;flex:1;}
@@ -76,9 +78,9 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
 .btn-req{background:#2e7d4f;color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:Arial;transition:background 0.12s;}
 .btn-req:hover{background:#1a3d2b;}
 
-/* CONSIGN / SELL */
+/* CONSIGN */
 .sell-intro{background:#fff;border:1px solid #e0eae0;border-radius:10px;overflow:hidden;margin-bottom:18px;display:flex;}
-.sell-intro-img{width:140px;flex-shrink:0;object-fit:cover;}
+.sell-intro-img{width:160px;flex-shrink:0;object-fit:contain;object-position:center;padding:12px;background:#e6f4ec;}
 .sell-intro-text{padding:20px;}
 .sell-intro-text h2{font-size:14px;font-weight:700;color:#1a2e1a;margin-bottom:6px;}
 .sell-intro-text p{font-size:11px;color:#5a7a5a;line-height:1.6;}
@@ -121,7 +123,6 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
 .sp-processing{background:#fff8e1;color:#7a5c00;}
 .payout-positive{color:#1e6b3a;font-weight:700;}
 .payout-pending{color:#7a8a7a;}
-
 .timeline-wrap{background:#fff;border:1px solid #e0eae0;border-radius:10px;padding:18px 20px;margin-bottom:18px;}
 .timeline-wrap h3{font-size:12px;font-weight:700;color:#1a2e1a;margin-bottom:14px;}
 .timeline{display:flex;flex-direction:column;gap:0;}
@@ -147,10 +148,10 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
 .ot-cell{font-size:11px;color:#3d5c3d;}
 .track-btn{background:none;border:1px solid #c8d8c8;border-radius:5px;padding:4px 9px;font-size:10px;font-weight:700;color:#2e7d4f;cursor:pointer;font-family:Arial;transition:all 0.12s;}
 .track-btn:hover{background:#e6f4ec;border-color:#2e7d4f;}
-
 .order-detail-card{background:#fff;border:1px solid #e0eae0;border-radius:10px;overflow:hidden;margin-bottom:16px;}
-.odc-header{display:flex;gap:0;border-bottom:1px solid #e0eae0;}
-.odc-img{width:100px;height:90px;object-fit:cover;flex-shrink:0;}
+.odc-header{display:flex;gap:0;border-bottom:1px solid #e0eae0;align-items:stretch;}
+.odc-img-wrap{width:110px;flex-shrink:0;background:#e6f4ec;display:flex;align-items:center;justify-content:center;padding:10px;}
+.odc-img{width:100%;max-height:90px;object-fit:contain;}
 .odc-info{padding:14px 16px;flex:1;}
 .odc-name{font-size:13px;font-weight:700;color:#1a2e1a;margin-bottom:3px;}
 .odc-meta{font-size:11px;color:#5a7a5a;}
@@ -170,11 +171,11 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
 .ts-item.current .ts-label{color:#1e6b3a;font-weight:700;}
 
 /* ABOUT */
-.about-banner{background:#1a3d2b;border-radius:10px;overflow:hidden;margin-bottom:18px;display:flex;min-height:150px;}
+.about-banner{background:#1a3d2b;border-radius:10px;overflow:hidden;margin-bottom:18px;display:flex;min-height:160px;}
 .about-banner-text{padding:28px;flex:1;}
 .about-banner-text h1{font-size:20px;font-weight:700;color:#fff;margin-bottom:7px;line-height:1.3;}
 .about-banner-text p{font-size:12px;color:#b8d4bf;line-height:1.65;max-width:380px;}
-.about-banner-img{width:200px;object-fit:cover;flex-shrink:0;}
+.about-banner-img{width:240px;object-fit:cover;object-position:center;flex-shrink:0;}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
 .stats-card{background:#2e7d4f;border-radius:9px;padding:14px;text-align:center;}
 .stats-num{font-size:20px;font-weight:700;color:#fff;}
@@ -188,7 +189,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
 .val-card p{font-size:10px;color:#5a7a5a;line-height:1.55;}
 
 /* MODAL */
-.modal-wrap{display:none;position:absolute;inset:0;background:rgba(10,30,10,0.45);z-index:50;align-items:center;justify-content:center;min-height:760px;}
+.modal-wrap{display:none;position:absolute;inset:0;background:rgba(10,30,10,0.45);z-index:50;align-items:center;justify-content:center;}
 .modal-wrap.open{display:flex;}
 .modal{background:#fff;border-radius:12px;padding:24px;max-width:360px;width:90%;position:relative;}
 .modal h2{font-size:14px;font-weight:700;color:#1a2e1a;margin-bottom:5px;}
@@ -257,7 +258,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
         <p>A trusted consignment marketplace for prosthetic components. Clinics, families, and certified prosthetists reuse safe parts instead of letting usable components go to waste.</p>
         <button class="btn-white" onclick="showPage('browse',null)">Browse Available Parts</button>
       </div>
-      <img class="home-hero-img" " alt="Prosthetic leg">
+      <img class="home-hero-img" src="home-hero.png" alt="Prosthetic leg">
     </div>
     <div class="stat-row">
       <div class="stat-card"><div class="stat-num">312</div><div class="stat-lbl">Parts listed</div></div>
@@ -300,7 +301,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
   </div>
   <div class="content">
     <div class="sell-intro">
-      <img class="sell-intro-img" src="" alt="Prosthetic components">
+      <img class="sell-intro-img" src="ossur.jpeg" alt="Prosthetic components">
       <div class="sell-intro-text">
         <h2>How consignment works</h2>
         <p>You submit the part. Foot Me Down reviews it for safety and clinical viability, lists it with accurate details, and matches it to a verified buyer. You receive payment minus a small platform fee that sustains the program. Track the status of all your submissions under My Consignments.</p>
@@ -351,41 +352,35 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
       </div>
       <div class="ct-row">
         <div><div class="ct-part-name">Össur Taleo Pediatric Foot</div><div class="ct-part-code">FMD-0041 &middot; 22cm &middot; Excellent</div></div>
-        <div class="ct-cell">Apr 2, 2026</div>
-        <div class="ct-cell">$1100</div>
+        <div class="ct-cell">Apr 2, 2026</div><div class="ct-cell">$1100</div>
         <div><span class="status-pill sp-listed">Listed</span></div>
         <div class="payout-pending">Pending</div>
       </div>
       <div class="ct-row">
         <div><div class="ct-part-name">Ottobock Silicone Liner 3mm</div><div class="ct-part-code">FMD-0057 &middot; XS &middot; Good</div></div>
-        <div class="ct-cell">Mar 18, 2026</div>
-        <div class="ct-cell">$160</div>
+        <div class="ct-cell">Mar 18, 2026</div><div class="ct-cell">$160</div>
         <div><span class="status-pill sp-matched">Buyer matched</span></div>
         <div class="payout-pending">In escrow</div>
       </div>
       <div class="ct-row">
         <div><div class="ct-part-name">Hosmer Endolite Knee Unit</div><div class="ct-part-code">FMD-0023 &middot; Pediatric S &middot; Good</div></div>
-        <div class="ct-cell">Mar 5, 2026</div>
-        <div class="ct-cell">$400</div>
+        <div class="ct-cell">Mar 5, 2026</div><div class="ct-cell">$400</div>
         <div><span class="status-pill sp-sold">Sold</span></div>
         <div class="payout-positive">+$400.00</div>
       </div>
       <div class="ct-row">
         <div><div class="ct-part-name">Pyramid Adapter 4-Bolt Rotator</div><div class="ct-part-code">FMD-0078 &middot; Standard &middot; Good</div></div>
-        <div class="ct-cell">Feb 20, 2026</div>
-        <div class="ct-cell">$36</div>
+        <div class="ct-cell">Feb 20, 2026</div><div class="ct-cell">$36</div>
         <div><span class="status-pill sp-review">Under review</span></div>
         <div class="payout-pending">Pending</div>
       </div>
       <div class="ct-row">
         <div><div class="ct-part-name">Fillauer Raize SACH Foot</div><div class="ct-part-code">FMD-0033 &middot; 18cm &middot; Fair</div></div>
-        <div class="ct-cell">Feb 10, 2026</div>
-        <div class="ct-cell">$800</div>
+        <div class="ct-cell">Feb 10, 2026</div><div class="ct-cell">$800</div>
         <div><span class="status-pill sp-sold">Sold</span></div>
         <div class="payout-positive">+$800.00</div>
       </div>
     </div>
-
     <div class="timeline-wrap">
       <h3>Consignment status guide</h3>
       <div class="timeline">
@@ -417,31 +412,27 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
       </div>
       <div class="ot-row">
         <div><div class="ot-part-name">Titanium Pediatric Pylon 25cm</div><div class="ot-order-num">ORD-7741 &middot; FMD-0064</div></div>
-        <div class="ot-cell">Apr 12, 2026</div>
-        <div class="ot-cell">$3800</div>
+        <div class="ot-cell">Apr 12, 2026</div><div class="ot-cell">$3800</div>
         <div><span class="status-pill sp-delivered">Delivered</span></div>
         <div><button class="track-btn" onclick="showOrderDetail('delivered')">View</button></div>
       </div>
       <div class="ot-row">
         <div><div class="ot-part-name">Össur Unity Elevated Vacuum System</div><div class="ot-order-num">ORD-7698 &middot; FMD-0091</div></div>
-        <div class="ot-cell">Apr 22, 2026</div>
-        <div class="ot-cell">$1200</div>
+        <div class="ot-cell">Apr 22, 2026</div><div class="ot-cell">$1200</div>
         <div><span class="status-pill sp-shipped">Shipped</span></div>
         <div><button class="track-btn" onclick="showOrderDetail('shipped')">Track</button></div>
       </div>
       <div class="ot-row">
         <div><div class="ot-part-name">WalkOn Flex Pediatric AFO</div><div class="ot-order-num">ORD-7712 &middot; FMD-0103</div></div>
-        <div class="ot-cell">Apr 28, 2026</div>
-        <div class="ot-cell">$340</div>
+        <div class="ot-cell">Apr 28, 2026</div><div class="ot-cell">$340</div>
         <div><span class="status-pill sp-processing">Processing</span></div>
         <div><button class="track-btn" onclick="showOrderDetail('processing')">View</button></div>
       </div>
     </div>
-
     <div style="font-size:11px;font-weight:700;color:#1a2e1a;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em;" id="order-detail-label">Order detail — ORD-7698</div>
     <div class="order-detail-card" id="order-detail-wrap">
       <div class="odc-header">
-        <img class="odc-img" src="" alt="Part" id="odc-img">
+        <div class="odc-img-wrap"><img class="odc-img" src="" alt="Part" id="odc-img"></div>
         <div class="odc-info">
           <div class="odc-name" id="odc-name">Össur Unity Elevated Vacuum System</div>
           <div class="odc-meta" id="odc-meta">ORD-7698 &middot; FMD-0091 &middot; Good condition &middot; Seller: CPO_123</div>
@@ -467,7 +458,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
         <h1>Prosthetics shouldn't have a shelf life.</h1>
         <p>Thousands of quality prosthetic components go unused each year while families struggle to afford care. We built Foot Me Down to close that gap through a trusted, certified reuse pipeline.</p>
       </div>
-      <img class="about-banner-img" src="" alt="Prosthetic leg">
+      <img class="about-banner-img" src="home-hero.png" alt="Prosthetic leg">
     </div>
     <div class="stats-row">
       <div class="stats-card"><div class="stats-num">312</div><div class="stats-lbl">Parts listed to date</div></div>
@@ -488,7 +479,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
       </div>
     </div>
     <div style="background:#f7f9f7;border:1px solid #e0eae0;border-radius:9px;padding:14px;font-size:10px;color:#5a7a5a;line-height:1.7;">
-      <strong style="color:#1a3d2b;">Note:</strong> Foot Me Down is a prototype marketplace developed to demonstrate the concept of certified prosthetic reuse. All statistics are illustrative. We welcome feedback from clinicians, families, and prosthetists.
+      <strong style="color:#1a3d2b;">Note:</strong> Foot Me Down is a prototype marketplace developed to demonstrate the concept of certified prosthetic reuse. All statistics are illustrative.
     </div>
   </div>
 </div>
@@ -497,9 +488,9 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
 </div>
 
 <!-- MODAL -->
-<div class="modal-wrap" id="modal" onclick="closeModal(event)">
+<div class="modal-wrap" id="modal" onclick="closeModal(event)" style="position:absolute;">
   <div class="modal" id="modal-box">
-    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">x</button>
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
     <div id="modal-content"></div>
   </div>
 </div>
@@ -507,12 +498,12 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#1a2e1a;min
 
 <script>
 const parts = [
-  {id:1,type:'foot',img:'',name:'Össur Taleo Pediatric Foot',price:'$340',cond:'Excellent',size:'22 cm',mo:7,compat:'Below-knee (transtibial)',code:'FMD-0041',tags:['Pediatric','Carbon fiber','High activity']},
-  {id:2,type:'liner',img:'',name:'Ottobock Silicone Liner 3mm',price:'$85',cond:'Good',size:'XS / #2',mo:4,compat:'Below-knee (transtibial)',code:'FMD-0057',tags:['Pediatric','Silicone','Hypoallergenic']},
-  {id:3,type:'knee',img:'',name:'Hosmer Endolite Knee Unit',price:'$720',cond:'Good',size:'Pediatric S',mo:14,compat:'Above-knee (transfemoral)',code:'FMD-0023',tags:['Pediatric','Mechanical','Single-axis']},
-  {id:4,type:'pylon',img:'',name:'Titanium Pediatric Pylon 25cm',price:'$195',cond:'Excellent',size:'25 cm',mo:5,compat:'Below-knee / Above-knee',code:'FMD-0064',tags:['Titanium','Lightweight','Universal']},
-  {id:5,type:'adapter',img:'',name:'Pyramid Adapter 4-Bolt Rotator',price:'$60',cond:'Good',size:'Standard',mo:9,compat:'Universal foot mount',code:'FMD-0078',tags:['Hardware','Rotational','Standard mount']},
-  {id:6,type:'foot',img:'',name:'Fillauer Raize SACH Foot',price:'$210',cond:'Fair',size:'18 cm',mo:18,compat:'Below-knee (transtibial)',code:'FMD-0033',tags:['Pediatric','SACH','Low activity']}
+  {id:1,type:'foot',img:'ossur.jpeg',name:'Össur Taleo Pediatric Foot',price:'$340',cond:'Excellent',size:'22 cm',mo:7,compat:'Below-knee (transtibial)',code:'FMD-0041',tags:['Pediatric','Carbon fiber','High activity']},
+  {id:2,type:'liner',img:'ottobock.jpeg',name:'Ottobock Silicone Liner 3mm',price:'$85',cond:'Good',size:'XS / #2',mo:4,compat:'Below-knee (transtibial)',code:'FMD-0057',tags:['Pediatric','Silicone','Hypoallergenic']},
+  {id:3,type:'knee',img:'endolite.jpeg',name:'Hosmer Endolite Knee Unit',price:'$720',cond:'Good',size:'Pediatric S',mo:14,compat:'Above-knee (transfemoral)',code:'FMD-0023',tags:['Pediatric','Mechanical','Single-axis']},
+  {id:4,type:'pylon',img:'titanium-pylon.jpeg',name:'Titanium Pediatric Pylon 25cm',price:'$195',cond:'Excellent',size:'25 cm',mo:5,compat:'Below-knee / Above-knee',code:'FMD-0064',tags:['Titanium','Lightweight','Universal']},
+  {id:5,type:'adapter',img:'pyramid-adapter.jpeg',name:'Pyramid Adapter 4-Bolt Rotator',price:'$60',cond:'Good',size:'Standard',mo:9,compat:'Universal foot mount',code:'FMD-0078',tags:['Hardware','Rotational','Standard mount']},
+  {id:6,type:'foot',img:'raize.jpeg',name:'Fillauer Raize SACH Foot',price:'$210',cond:'Fair',size:'18 cm',mo:18,compat:'Below-knee (transtibial)',code:'FMD-0033',tags:['Pediatric','SACH','Low activity']}
 ];
 const condClass={Excellent:'mc-ex',Good:'mc-go',Fair:'mc-fa'};
 
@@ -521,7 +512,7 @@ function renderCards(filter){
   const list=filter==='all'?parts:parts.filter(p=>p.type===filter);
   g.innerHTML=list.map(p=>`
     <div class="part-card">
-      <div class="card-img-wrap"><img src="${p.img}" alt="${p.name}" onerror="this.parentElement.style.background='#e6f4ec'"></div>
+      <div class="card-img-wrap"><img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'"></div>
       <div class="card-body">
         <div class="card-top"><div class="card-name">${p.name}</div><div class="card-price">${p.price}</div></div>
         <div class="meta-row"><span class="mc ${condClass[p.cond]}">${p.cond}</span><span class="mc mc-gray">${p.size}</span></div>
@@ -531,7 +522,7 @@ function renderCards(filter){
         <div class="tags-row">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       </div>
       <div class="card-foot">
-        <div class="seller-row"><div class="s-avatar">CP</div><span class="s-name">CPO_123</span><div class="v-dot" title="Verified CPO"></div></div>
+        <div class="seller-row"><div class="s-avatar">CP</div><span class="s-name">CPO_123</span><div class="v-dot"></div></div>
         <button class="btn-req" onclick="requestPart(${p.id})">Request Part</button>
       </div>
     </div>`).join('');
@@ -546,17 +537,17 @@ function filterCards(el,type){
 const trackData={
   delivered:{
     name:'Titanium Pediatric Pylon 25cm',meta:'ORD-7741 &middot; FMD-0064 &middot; Excellent condition &middot; Seller: CPO_123',price:'$195.00',
-    img:'',
+    img:'titanium-pylon.jpeg',
     steps:[{l:'Request approved',d:true},{l:'Payment confirmed',d:true},{l:'Dispatched',d:true},{l:'In transit',d:true},{l:'Delivered',d:true,cur:false}]
   },
   shipped:{
     name:'Össur Unity Elevated Vacuum System',meta:'ORD-7698 &middot; FMD-0091 &middot; Good condition &middot; Seller: CPO_123',price:'$480.00',
-    img:'',
+    img:'ossur.jpeg',
     steps:[{l:'Request approved',d:true},{l:'Payment confirmed',d:true},{l:'Dispatched',d:true},{l:'In transit',d:true,cur:true},{l:'Delivered',d:false}]
   },
   processing:{
     name:'WalkOn Flex Pediatric AFO',meta:'ORD-7712 &middot; FMD-0103 &middot; Good condition &middot; Seller: CPO_456',price:'$265.00',
-    img:'',
+    img:'ottobock.jpeg',
     steps:[{l:'Request approved',d:true},{l:'Payment confirmed',d:true},{l:'Dispatched',d:false,cur:true},{l:'In transit',d:false},{l:'Delivered',d:false}]
   }
 };
@@ -567,7 +558,7 @@ function showOrderDetail(key){
   document.getElementById('odc-name').textContent=d.name;
   document.getElementById('odc-meta').innerHTML=d.meta;
   document.getElementById('odc-price').textContent=d.price;
-  const labels={'delivered':'ORD-7741','shipped':'ORD-7698','processing':'ORD-7712'};
+  const labels={delivered:'ORD-7741',shipped:'ORD-7698',processing:'ORD-7712'};
   document.getElementById('order-detail-label').textContent='Order detail — '+labels[key];
   const checkSVG=`<svg width="9" height="9" viewBox="0 0 9 9" fill="none" stroke="#fff" stroke-width="2"><polyline points="1.5 4.5 3.5 6.5 7.5 2.5"/></svg>`;
   document.getElementById('track-steps').innerHTML=d.steps.map(s=>`
