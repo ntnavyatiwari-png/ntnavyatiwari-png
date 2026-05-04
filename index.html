@@ -1,0 +1,270 @@
+```jsx
+import { useMemo, useState } from 'react'
+
+const sellerProfiles = {
+  CPO_123: {
+    role: 'Certified Prosthetist-Orthotist',
+    location: 'Boston, MA',
+    rating: '4.9',
+  },
+}
+
+const listings = [
+  {
+    id: 1,
+    title: 'Carbon Fiber Foot',
+    category: 'Foot',
+    size: '22 cm',
+    condition: 'Excellent',
+    price: 180,
+    timeUsed: 4,
+    seller: 'CPO_123',
+    profileId: 'CPO_123',
+    location: 'Boston, MA',
+    description: 'Lightweight carbon foot with strong energy return for lower-limb fitting.',
+    tags: ['foot', 'carbon fiber', 'pediatric', 'lightweight'],
+    compatibility: 'Pediatric lower-limb fitting',
+    itemCode: 'FMD-FT-1022',
+  },
+  {
+    id: 2,
+    title: 'Pyramid Adapter',
+    category: 'Adapter',
+    size: 'Standard',
+    condition: 'Good',
+    price: 40,
+    timeUsed: 8,
+    seller: 'CPO_123',
+    profileId: 'CPO_123',
+    location: 'Providence, RI',
+    description: 'Reusable adapter for modular lower-limb prosthetic systems.',
+    tags: ['adapter', 'pyramid', 'alignment', 'modular'],
+    compatibility: 'Standard modular lower-limb setup',
+    itemCode: 'FMD-AD-2041',
+  },
+  {
+    id: 3,
+    title: 'Single-Axis Knee',
+    category: 'Knee',
+    size: 'Adult M',
+    condition: 'Very Good',
+    price: 240,
+    timeUsed: 10,
+    seller: 'Bay State Clinic',
+    profileId: '',
+    location: 'Cambridge, MA',
+    description: 'Mechanical single-axis knee for stable transfemoral setups.',
+    tags: ['knee', 'single-axis', 'mechanical'],
+    compatibility: 'Transfemoral mechanical assembly',
+    itemCode: 'FMD-KN-1188',
+  },
+  {
+    id: 4,
+    title: 'Endoskeletal Pylon',
+    category: 'Pylon',
+    size: '30 mm',
+    condition: 'Good',
+    price: 60,
+    timeUsed: 6,
+    seller: 'NextStep Clinic',
+    profileId: '',
+    location: 'Hartford, CT',
+    description: 'Durable pylon for modular lower-limb assembly.',
+    tags: ['pylon', 'endoskeletal', 'alignment'],
+    compatibility: '30 mm modular system',
+    itemCode: 'FMD-PY-3006',
+  },
+  {
+    id: 5,
+    title: 'Hydraulic Knee Joint',
+    category: 'Knee',
+    size: 'Adult L',
+    condition: 'Excellent',
+    price: 400,
+    timeUsed: 3,
+    seller: 'Advanced Limb Center',
+    profileId: '',
+    location: 'New Haven, CT',
+    description: 'Hydraulic knee unit designed for smoother gait and higher mobility.',
+    tags: ['knee', 'hydraulic', 'mobility'],
+    compatibility: 'Higher-mobility transfemoral fitting',
+    itemCode: 'FMD-KN-4073',
+  },
+  {
+    id: 6,
+    title: 'Shock Absorbing Foot',
+    category: 'Foot',
+    size: '24 cm',
+    condition: 'Good',
+    price: 200,
+    timeUsed: 12,
+    seller: 'GreenStep Clinic',
+    profileId: '',
+    location: 'Worcester, MA',
+    description: 'Foot component with shock absorption for active users.',
+    tags: ['foot', 'shock absorbing', 'comfort'],
+    compatibility: 'Active-user lower-limb setup',
+    itemCode: 'FMD-FT-2412',
+  },
+  {
+    id: 7,
+    title: 'Rotational Adapter',
+    category: 'Adapter',
+    size: 'Universal',
+    condition: 'Very Good',
+    price: 55,
+    timeUsed: 5,
+    seller: 'CPO_123',
+    profileId: 'CPO_123',
+    location: 'Boston, MA',
+    description: 'Rotational adapter for flexible positioning and compatibility.',
+    tags: ['adapter', 'rotational', 'universal'],
+    compatibility: 'Universal adapter fitting',
+    itemCode: 'FMD-AD-7055',
+  },
+  {
+    id: 8,
+    title: 'Carbon Pylon Tube',
+    category: 'Pylon',
+    size: 'Standard',
+    condition: 'Excellent',
+    price: 120,
+    timeUsed: 2,
+    seller: 'Urban Limb Lab',
+    profileId: '',
+    location: 'Somerville, MA',
+    description: 'Carbon pylon tube with low weight and strong structural performance.',
+    tags: ['pylon', 'carbon', 'lightweight'],
+    compatibility: 'Standard modular pylon connection',
+    itemCode: 'FMD-PY-8120',
+  },
+  {
+    id: 9,
+    title: 'Pediatric Silicone Liner',
+    category: 'Liner',
+    size: 'XS',
+    condition: 'New',
+    price: 35,
+    timeUsed: 0,
+    seller: 'CPO_123',
+    profileId: 'CPO_123',
+    location: 'Brookline, MA',
+    description: 'Soft silicone liner sized for pediatric comfort.',
+    tags: ['liner', 'silicone', 'pediatric'],
+    compatibility: 'Pediatric socket liner',
+    itemCode: 'FMD-LN-9001',
+  },
+]
+
+const categories = ['All', 'Foot', 'Adapter', 'Knee', 'Pylon', 'Liner']
+const sortOptions = ['Recommended', 'Lowest Price', 'Highest Price', 'Newest Condition']
+
+const conditionRank = {
+  New: 5,
+  Excellent: 4,
+  'Very Good': 3,
+  Good: 2,
+  Fair: 1,
+}
+
+export default function Browse() {
+  const [searchText, setSearchText] = useState('')
+  const [category, setCategory] = useState('All')
+  const [maxTimeUsed, setMaxTimeUsed] = useState(12)
+  const [minPrice, setMinPrice] = useState(0)
+  const [maxPrice, setMaxPrice] = useState(500)
+  const [sortBy, setSortBy] = useState('Recommended')
+
+  const filteredListings = useMemo(() => {
+    return listings
+      .filter((item) => {
+        const query = searchText.toLowerCase()
+
+        return (
+          (!query ||
+            [
+              item.title,
+              item.category,
+              item.description,
+              item.seller,
+              ...item.tags,
+            ]
+              .join(' ')
+              .toLowerCase()
+              .includes(query)) &&
+          (category === 'All' || item.category === category) &&
+          item.timeUsed <= maxTimeUsed &&
+          item.price >= Math.min(minPrice, maxPrice) &&
+          item.price <= Math.max(minPrice, maxPrice)
+        )
+      })
+      .sort((a, b) => {
+        if (sortBy === 'Lowest Price') return a.price - b.price
+        if (sortBy === 'Highest Price') return b.price - a.price
+        if (sortBy === 'Newest Condition') return conditionRank[b.condition] - conditionRank[a.condition]
+        return 0
+      })
+  }, [searchText, category, maxTimeUsed, minPrice, maxPrice, sortBy])
+
+  return (
+    <div style={{ background: '#f7f8fa', padding: '32px', minHeight: '100vh' }}>
+      <h1>Browse Components</h1>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+        {filteredListings.map((item) => {
+          const sellerProfile = sellerProfiles[item.profileId]
+
+          return (
+            <div
+              key={item.id}
+              style={{
+                background: 'white',
+                borderRadius: '20px',
+                padding: '24px',
+                boxShadow: '0 10px 25px rgba(0,0,0,0.05)',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>{item.category}</span>
+                <strong>${item.price}</strong>
+              </div>
+
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+
+              <div>
+                <div>Size: {item.size}</div>
+                <div>Condition: {item.condition}</div>
+                <div>Used: {item.timeUsed} mo</div>
+              </div>
+
+              <div>
+                <strong>Compatibility:</strong> {item.compatibility}
+              </div>
+
+              <div>
+                <strong>Item Code:</strong> {item.itemCode}
+              </div>
+
+              <div>
+                {item.tags.map((tag) => (
+                  <span key={tag} style={{ marginRight: '6px' }}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div style={{ marginTop: '16px' }}>
+                <strong>{item.seller}</strong>
+                {sellerProfile && <div>{sellerProfile.role}</div>}
+              </div>
+
+              <button style={{ marginTop: '12px' }}>Request Part</button>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+```
